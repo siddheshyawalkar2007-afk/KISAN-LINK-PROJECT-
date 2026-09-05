@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KisanLink | Government Dashboard</title>
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="C_dash.css">
+
+</head>
+
+
+<body>
+
+    <!-- MOBILE OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+
+    <!-- SUCCESS MODAL -->
+    <div class="modal-overlay" id="successModal">
+
+        <div class="success-modal">
+
+            <div class="success-icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <h2>Payment Processed Successfully!</h2>
+
+            <p>
+                The farmer payment request has been successfully submitted
+                for further bank processing.
+            </p>
+
+            <button id="successOkBtn">
+                Continue
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- LOGO -->
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <div class="logo-text">
+
+                <h2>KisanLink</h2>
+
+                <span>
+                    Government Procurement Portal
+                </span>
+
+            </div>
+
+            <button class="close-sidebar" id="closeSidebar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <!-- PROFILE -->
+        <div class="sidebar-profile">
+
+            <div class="sidebar-avatar" id="sidebarAvatar">
+                GC
+            </div>
+
+            <div>
+
+                <strong id="sidebarName">
+                    Government Center
+                </strong>
+
+                <span>
+                    Authorized Center
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+        <nav class="sidebar-menu">
+
+            <button class="menu-item active" data-section="dashboard">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </button>
+
+
+            <button class="menu-item" data-section="profile">
+                <i class="fa-solid fa-building-columns"></i>
+                <span>Center Profile</span>
+            </button>
+
+
+            <button class="menu-item" data-section="farmers">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>Farmer Bookings</span>
+
+                <span class="menu-badge" id="farmerBadge">
+                    0
+                </span>
+
+            </button>
+
+
+            <!-- FARMERS ARRIVED REMOVED FROM SIDEBAR -->
+
+
+            <button class="menu-item" data-section="completedFarmers">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>Completed Payments</span>
+
+            </button>
+
+
+            <button class="menu-item" data-section="payment">
+
+                <i class="fa-solid fa-money-bill-transfer"></i>
+
+                <span>Payment History</span>
+
+            </button>
+
+
+            <button class="menu-item" data-section="notifications">
+
+                <i class="fa-solid fa-bell"></i>
+
+                <span>Notifications</span>
+
+                <span class="menu-badge notification-menu" id="notificationBadge">
+                    0
+                </span>
+
+            </button>
+
+        </nav>
+
+
+        <!-- BOTTOM -->
+        <div class="sidebar-bottom">
+
+            <div class="government-badge">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Secure Government Portal
+                </span>
+
+            </div>
+
+
+            <button class="menu-item logout-button" id="logoutBtn">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="main-wrapper">
+
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <button class="hamburger" id="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+
+            <div class="topbar-title">
+
+                <h1 id="pageTitle">
+                    Government Dashboard
+                </h1>
+
+                <p id="pageSubtitle">
+                    Agriculture Procurement Management System
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <div class="date-box">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                    <span id="currentDate"></span>
+
+                </div>
+
+
+                <button class="topbar-button" id="notificationButton">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot" id="topNotificationBadge">
+                        0
+                    </span>
+
+                </button>
+
+
+                <button class="top-profile" id="topProfileButton">
+
+                    <div class="top-avatar" id="topAvatar">
+                        GC
+                    </div>
+
+                    <div class="top-profile-text">
+
+                        <strong id="topName">
+                            Government Center
+                        </strong>
+
+                        <span>
+                            Government Account
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <main class="main-content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section class="content-section active" id="dashboard">
+
+
+                <div class="government-hero">
+
+                    <div class="hero-content">
+
+                        <div class="hero-badge">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            GOVERNMENT PROCUREMENT SYSTEM
+
+                        </div>
+
+
+                        <h2>
+                            Empowering Farmers,<br>
+                            Strengthening Agriculture.
+                        </h2>
+
+
+                        <p>
+                            Manage farmer registrations, arrivals,
+                            grain procurement and government payments
+                            from one secure digital platform.
+                        </p>
+
+
+                        <div class="hero-buttons">
+
+                            <button data-go="farmers">
+
+                                <i class="fa-solid fa-users"></i>
+
+                                View Farmers
+
+                            </button>
+
+
+                            <button class="secondary-hero-btn"
+                                data-go="arrivedFarmers">
+
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+
+                                Check Arrivals
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-image">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1594771804886-a933bb2d609b?auto=format&fit=crop&w=1000&q=80"
+                            alt="Indian Agriculture">
+
+                        <div class="hero-floating-card">
+
+                            <i class="fa-solid fa-wheat-awn"></i>
+
+                            <div>
+
+                                <strong>
+                                    Digital Procurement
+                                </strong>
+
+                                <span>
+                                    Transparent & Efficient
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-title dashboard-heading">
+
+                    <div>
+
+                        <small>OVERVIEW</small>
+
+                        <h2>
+                            Procurement Overview
+                        </h2>
+
+                        <p>
+                            Real-time summary of farmer activities.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DASHBOARD CARDS -->
+                <div class="dashboard-grid">
+
+
+                    <div class="dashboard-card clickable-card"
+                        id="totalBookingsCard">
+
+                        <div class="dashboard-icon blue">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Total Bookings</span>
+
+                            <strong id="bookingCount">0</strong>
+
+                            <small class="card-growth">
+                                Registered Farmers
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FARMERS ARRIVED CARD -->
+                    <div class="dashboard-card clickable-card"
+                        id="farmersArrivedCard">
+
+                        <div class="dashboard-icon orange">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Farmers Arrived</span>
+
+                            <strong id="arrivedCount">0</strong>
+
+                            <small class="card-info">
+                                Physical Center Entry
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PENDING CARD REMOVED -->
+
+
+                    <div class="dashboard-card clickable-card"
+                        id="paymentsCompletedCard">
+
+                        <div class="dashboard-icon green">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <div>
+
+                            <span>Payments Completed</span>
+
+                            <strong id="completedCount">0</strong>
+
+                            <small class="card-growth">
+                                Successfully Processed
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION CARDS -->
+                <div class="visual-info-grid">
+
+                    <div class="visual-card large-visual-card">
+
+                        <img
+                            src="https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?auto=format&fit=crop&w=1000&q=80"
+                            alt="Farmer Agriculture">
+
+                        <div class="visual-overlay">
+
+                            <span>
+                                <i class="fa-solid fa-tractor"></i>
+                                FARMER SUPPORT
+                            </span>
+
+                            <h3>
+                                Digital Agriculture
+                                Procurement System
+                            </h3>
+
+                            <p>
+                                Making government procurement
+                                easier and more transparent.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mini-visual-grid">
+
+                        <div class="mini-visual-card">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=600&q=80"
+                                alt="Wheat">
+
+                            <div>
+
+                                <i class="fa-solid fa-wheat-awn"></i>
+
+                                <h4>Grain Collection</h4>
+
+                                <p>Efficient crop procurement</p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="mini-visual-card">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=600&q=80"
+                                alt="Agriculture">
+
+                            <div>
+
+                                <i class="fa-solid fa-leaf"></i>
+
+                                <h4>Smart Farming</h4>
+
+                                <p>Supporting rural development</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+                <div class="quick-actions">
+
+                    <div class="quick-title-row">
+
+                        <div>
+
+                            <h3>Quick Actions</h3>
+
+                            <p>
+                                Access important government services quickly
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-grid">
+
+                        <button data-go="farmers">
+
+                            <div class="quick-icon blue">
+                                <i class="fa-solid fa-calendar-check"></i>
+                            </div>
+
+                            <span>Farmer Bookings</span>
+
+                            <small>Manage registrations</small>
+
+                        </button>
+
+
+                        <button data-go="arrivedFarmers">
+
+                            <div class="quick-icon orange">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+
+                            <span>Farmers Arrived</span>
+
+                            <small>Verify center entry</small>
+
+                        </button>
+
+
+                        <button data-go="payment">
+
+                            <div class="quick-icon green">
+                                <i class="fa-solid fa-money-bill-transfer"></i>
+                            </div>
+
+                            <span>Payment History</span>
+
+                            <small>Track transactions</small>
+
+                        </button>
+
+
+                        <button data-go="profile">
+
+                            <div class="quick-icon purple">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+
+                            <span>Center Profile</span>
+
+                            <small>Manage information</small>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT ACTIVITY -->
+                <div class="recent-section">
+
+                    <div class="recent-header">
+
+                        <div>
+
+                            <h3>Recent Activity</h3>
+
+                            <p>
+                                Latest farmer and payment activities
+                            </p>
+
+                        </div>
+
+                        <button data-go="notifications">
+                            View All
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+
+                    <div id="recentActivity"></div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <section class="content-section" id="profile">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>GOVERNMENT CENTER</small>
+
+                        <h2>Center Profile</h2>
+
+                        <p>
+                            Official government procurement center information.
+                        </p>
+
+                    </div>
+
+
+                    <button class="edit-profile-btn" id="editProfileBtn">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Edit Profile
+
+                    </button>
+
+                </div>
+
+
+                <div class="profile-header">
+
+                    <div class="profile-avatar" id="profileAvatar">
+                        GC
+                    </div>
+
+
+                    <div>
+
+                        <h2 id="profileName">
+                            Government Center
+                        </h2>
+
+                        <span class="verified">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Verified Government Center
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-id">
+
+                        <span>Center ID</span>
+
+                        <strong id="centerId">
+                            GOV-00001
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-grid">
+
+                    <div class="info">
+                        <label>Center Name</label>
+                        <strong id="infoName">—</strong>
+                    </div>
+
+                    <div class="info">
+                        <label>Center Officer</label>
+                        <strong id="infoOfficer">—</strong>
+                    </div>
+
+                    <div class="info">
+                        <label>Mobile Number</label>
+                        <strong id="infoMobile">—</strong>
+                    </div>
+
+                    <div class="info">
+                        <label>Email</label>
+                        <strong id="infoEmail">—</strong>
+                    </div>
+
+                    <div class="info">
+                        <label>Address</label>
+                        <strong id="infoAddress">—</strong>
+                    </div>
+
+                    <div class="info">
+                        <label>District</label>
+                        <strong id="infoDistrict">—</strong>
+                    </div>
+
+                    <div class="info">
+                        <label>State</label>
+                        <strong id="infoState">—</strong>
+                    </div>
+
+                    <div class="info">
+                        <label>Pincode</label>
+                        <strong id="infoPincode">—</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= EDIT PROFILE ================= -->
+
+            <section class="content-section" id="editProfile">
+
+                <button class="back-btn" id="backToProfile">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Profile
+                </button>
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>EDIT PROFILE</small>
+
+                        <h2>Update Government Center</h2>
+
+                        <p>Update official center information.</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="edit-profile-card">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Center Name</label>
+                            <input type="text" id="editName">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Center Officer</label>
+                            <input type="text" id="editOfficer">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input type="text" id="editMobile">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="editEmail">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" id="editAddress">
+                        </div>
+
+                        <div class="form-group">
+                            <label>District</label>
+                            <input type="text" id="editDistrict">
+                        </div>
+
+                        <div class="form-group">
+                            <label>State</label>
+                            <input type="text" id="editState">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Pincode</label>
+                            <input type="text" id="editPincode">
+                        </div>
+
+                    </div>
+
+
+                    <button class="proceed-btn" id="saveProfileBtn">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Save Changes
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= FARMER BOOKINGS ================= -->
+
+            <section class="content-section" id="farmers">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>FARMER MANAGEMENT</small>
+
+                        <h2>Farmer Bookings</h2>
+
+                        <p>
+                            View all farmers registered for grain procurement.
+                        </p>
+
+                    </div>
+
+
+                    <div class="booking-total">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        Total:
+
+                        <strong id="bookingPageCount">0</strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="farmerSearch"
+                        placeholder="Search farmer by name or mobile number...">
+
+                </div>
+
+
+                <div id="farmerBookingContainer"></div>
+
+            </section>
+
+
+            <!-- ================= ARRIVED FARMERS PAGE ================= -->
+
+            <section class="content-section" id="arrivedFarmers">
+
+                <button class="back-btn" id="backFromArrived">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Dashboard
+
+                </button>
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>CENTER ENTRY MANAGEMENT</small>
+
+                        <h2>Farmers Arrived at Center</h2>
+
+                        <p>
+                            Farmers who have physically arrived at the collection center.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="arrivedFarmerSearch"
+                        placeholder="Search arrived farmer by name or mobile...">
+
+                </div>
+
+
+                <div id="arrivedFarmerContainer"></div>
+
+            </section>
+
+
+            <!-- ================= COMPLETED FARMERS ================= -->
+
+            <section class="content-section" id="completedFarmers">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>COMPLETED PAYMENTS</small>
+
+                        <h2>Farmers Payment Completed</h2>
+
+                        <p>
+                            Farmers whose payment has been successfully processed.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="completedFarmerContainer"></div>
+
+            </section>
+
+
+            <!-- ================= FARMER DETAILS ================= -->
+
+            <section class="content-section" id="farmerDetails">
+
+                <button class="back-btn" id="backToFarmers">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Farmers
+
+                </button>
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>FARMER INFORMATION</small>
+
+                        <h2>Farmer Details</h2>
+
+                        <p>Personal, crop and bank information.</p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="farmerDetailsContainer"></div>
+
+            </section>
+
+
+            <!-- ================= PAYMENT PROCESS ================= -->
+
+            <section class="content-section" id="paymentProcess">
+
+                <button class="back-btn" id="backToDetails">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back
+
+                </button>
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>PAYMENT PROCESS</small>
+
+                        <h2>Process Farmer Payment</h2>
+
+                        <p>
+                            Verify farmer bank details before payment processing.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="paymentProcessContainer"></div>
+
+            </section>
+
+
+            <!-- ================= PAYMENT HISTORY ================= -->
+
+            <section class="content-section" id="payment">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>PAYMENTS</small>
+
+                        <h2>Payment History</h2>
+
+                        <p>
+                            View all processed government payments with date and time.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div id="paymentContainer"></div>
+
+            </section>
+
+
+            <!-- ================= PAYMENT DETAILS ================= -->
+
+            <section class="content-section" id="paymentDetails">
+
+                <button class="back-btn" id="backToPayment">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Payment History
+
+                </button>
+
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>PAYMENT DETAILS</small>
+
+                        <h2>Payment Status</h2>
+
+                        <p>
+                            Current government and bank approval status.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="paymentDetailsContainer"></div>
+
+            </section>
+
+
+            <!-- ================= NOTIFICATIONS ================= -->
+
+            <section class="content-section" id="notifications">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <small>ALERTS & UPDATES</small>
+
+                        <h2>Notifications</h2>
+
+                        <p>
+                            Latest government procurement updates.
+                        </p>
+
+                    </div>
+
+
+                    <button class="cancel-btn" id="clearNotifications">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                        Clear All
+
+                    </button>
+
+                </div>
+`
+
+                <div id="notificationContainer"></div>
+
+            </section>
+
+        </main>
+
+
+        <!-- FOOTER -->
+
+        <footer class="dashboard-footer">
+
+            <div>
+
+                <i class="fa-solid fa-building-columns"></i>
+
+                Government Agriculture Procurement Portal
+
+            </div>
+
+            <span>
+                © 2026 KisanLink | Secure Digital Agriculture Platform
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <script src="C_dash.js"></script>
+
+</body>
+
+</html>
+
+
+
+

@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KisanLink | Gate Pass Dashboard</title>
+
+
+    <!-- GOOGLE FONT -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="gate_pass.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         MOBILE OVERLAY
+    ========================================== -->
+
+    <div
+        class="overlay"
+        id="overlay"
+    ></div>
+
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <div class="logo-icon">
+
+                <i class="fa-solid fa-wheat-awn"></i>
+
+            </div>
+
+
+            <div>
+
+                <h2>KisanLink</h2>
+
+                <span>Gate Management</span>
+
+            </div>
+
+
+            <button
+                class="close-sidebar"
+                id="closeSidebar"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+
+        <!-- PROFILE -->
+
+        <div class="sidebar-profile">
+
+            <div
+                class="profile-avatar"
+                id="sidebarAvatar"
+            >
+                GP
+            </div>
+
+
+            <div>
+
+                <h4 id="sidebarName">
+                    Gate Officer
+                </h4>
+
+                <span>
+                    Gate Pass Authority
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+
+            <p class="menu-title">
+                MAIN MENU
+            </p>
+
+
+            <button
+                class="menu-item active"
+                data-section="dashboard"
+            >
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>Dashboard</span>
+
+            </button>
+
+
+
+            <button
+                class="menu-item"
+                data-section="farmers"
+            >
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>Farmer Bookings</span>
+
+                <span
+                    class="menu-badge"
+                    id="farmerBadge"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+
+            <p class="menu-title">
+                ACCOUNT
+            </p>
+
+
+
+            <button
+                class="menu-item"
+                data-section="profile"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>My Profile</span>
+
+            </button>
+
+
+
+            <button
+                class="menu-item logout"
+                id="logoutBtn"
+            >
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </button>
+
+
+        </nav>
+
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="main-content">
+
+
+
+        <!-- =========================================
+             TOPBAR
+        ========================================== -->
+
+        <header class="topbar">
+
+
+            <div class="top-left">
+
+
+                <button
+                    class="hamburger"
+                    id="hamburger"
+                >
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div>
+
+                    <h2 id="pageTitle">
+                        Gate Pass Dashboard
+                    </h2>
+
+                    <p>
+                        Farmer arrival verification system
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="top-right">
+
+
+                <div class="date-box">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <span id="currentDate"></span>
+
+                </div>
+
+
+                <button
+                    class="top-profile"
+                    id="topProfileButton"
+                >
+
+                    <div
+                        class="top-avatar"
+                        id="topAvatar"
+                    >
+                        GP
+                    </div>
+
+                    <span id="topName">
+                        Gate Officer
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =========================================
+             DASHBOARD SECTION
+        ========================================== -->
+
+        <section
+            class="content-section active"
+            id="dashboard"
+        >
+
+
+            <!-- HERO -->
+
+            <div class="welcome-banner">
+
+                <div class="welcome-content">
+
+                    <span class="welcome-tag">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        GATE MANAGEMENT SYSTEM
+
+                    </span>
+
+
+                    <h1>
+                        Welcome to Gate Pass Dashboard
+                    </h1>
+
+
+                    <p>
+                        Verify farmer bookings and confirm
+                        farmer arrival at the government
+                        collection center.
+                    </p>
+
+
+                    <button
+                        class="primary-btn"
+                        data-go="farmers"
+                    >
+
+                        View Farmer Bookings
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+
+                <div class="welcome-visual">
+
+                    <div class="visual-circle circle-one"></div>
+
+                    <div class="visual-circle circle-two"></div>
+
+
+                    <div class="gate-illustration">
+
+                        <i class="fa-solid fa-warehouse"></i>
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================================
+                 STATS
+            ========================================== -->
+
+            <div class="stats-grid">
+
+
+                <!-- TOTAL -->
+
+                <div
+                    class="stat-card clickable"
+                    id="totalBookingsCard"
+                >
+
+                    <div class="stat-icon green">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>Total Bookings</p>
+
+                        <h2 id="bookingCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ARRIVED -->
+
+                <div
+                    class="stat-card clickable"
+                    id="farmersArrivedCard"
+                >
+
+                    <div class="stat-icon teal">
+
+                        <i class="fa-solid fa-user-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>Farmers Arrived</p>
+
+                        <h2 id="arrivedCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NOT ARRIVED -->
+
+                <div
+                    class="stat-card clickable"
+                    id="notArrivedCard"
+                >
+
+                    <div class="stat-icon orange">
+
+                        <i class="fa-solid fa-user-clock"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>Not Arrived</p>
+
+                        <h2 id="notArrivedCount">
+                            0
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 QUICK INFO
+            ========================================== -->
+
+            <div class="dashboard-grid">
+
+
+                <div class="recent-card">
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span>
+                                LIVE STATUS
+                            </span>
+
+                            <h2>
+                                Recent Gate Activity
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="activity-list"
+                        id="recentActivity"
+                    ></div>
+
+
+                </div>
+
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Gate Officer Access
+                    </h3>
+
+
+                    <p>
+                        You can verify farmer bookings
+                        and mark farmers as arrived.
+                    </p>
+
+
+                    <div class="access-list">
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            View Farmer Bookings
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Search Farmers
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Confirm Arrival
+
+                        </div>
+
+
+                        <div class="restricted">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            Payment Access Restricted
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             FARMERS SECTION
+        ========================================== -->
+
+        <section
+            class="content-section"
+            id="farmers"
+        >
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-tag">
+                        FARMER MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Farmer Bookings
+                    </h1>
+
+                    <p>
+                        Search and verify farmer arrival.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="count-box"
+                    id="bookingPageCount"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="search-card">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        id="farmerSearch"
+                        placeholder="Search farmer by name or mobile number..."
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FARMER LIST -->
+
+            <div
+                class="farmer-list"
+                id="farmerBookingContainer"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             FARMER DETAILS
+        ========================================== -->
+
+        <section
+            class="content-section"
+            id="farmerDetails"
+        >
+
+
+            <div class="back-row">
+
+                <button
+                    class="back-btn"
+                    id="backToFarmers"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Farmers
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="farmerDetailsContainer"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- =========================================
+             PROFILE
+        ========================================== -->
+
+        <section
+            class="content-section"
+            id="profile"
+        >
+
+
+            <div class="profile-page-card">
+
+
+                <div class="profile-cover"></div>
+
+
+                <div class="profile-main">
+
+
+                    <div
+                        class="large-avatar"
+                        id="profileAvatar"
+                    >
+                        GP
+                    </div>
+
+
+                    <div class="profile-title">
+
+                        <h1 id="profileName">
+                            Gate Officer
+                        </h1>
+
+                        <p>
+                            Government Collection Center
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="profile-details">
+
+
+                    <div class="profile-detail">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                        <div>
+
+                            <span>Employee ID</span>
+
+                            <strong id="gateId">
+                                GATE-001
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-detail">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                        <div>
+
+                            <span>Designation</span>
+
+                            <strong id="infoDesignation">
+                                Gate Pass Officer
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-detail">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        <div>
+
+                            <span>Email</span>
+
+                            <strong id="infoEmail">
+                                gate@KisanLink.com
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-detail">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <div>
+
+                            <span>Mobile Number</span>
+
+                            <strong id="infoMobile">
+                                9876543210
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-detail">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <div>
+
+                            <span>Collection Center</span>
+
+                            <strong id="infoCenter">
+                                Pimpri Government Collection Center
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="gate_pass.js"></script>
+
+
+</body>
+
+</html>

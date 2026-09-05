@@ -1,0 +1,366 @@
+/* =========================================
+   GATE OFFICER REGISTRATION BUTTON
+========================================= */
+
+.gate-registration-link {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-decoration: none;
+
+    padding: 16px 18px;
+
+    margin-top: 22px;
+
+    margin-bottom: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0fffb,
+            #e4fff9
+        );
+
+    border:
+        1px solid
+        rgba(29, 226, 189, 0.45);
+
+    border-radius: 16px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition:
+        all 0.35s ease;
+
+    box-shadow:
+        0 8px 20px
+        rgba(18, 74, 66, 0.06);
+
+}
+
+
+/* =========================================
+   HOVER EFFECT
+========================================= */
+
+.gate-registration-link:hover {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        #1de2bd;
+
+    box-shadow:
+        0 15px 30px
+        rgba(29, 226, 189, 0.18);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e4fff9,
+            #d5fff5
+        );
+
+}
+
+
+/* =========================================
+   ACTIVE CLICK EFFECT
+========================================= */
+
+.gate-registration-link:active {
+
+    transform:
+        translateY(-1px)
+        scale(0.99);
+
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.gate-registration-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    min-width: 52px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #1de2bd,
+            #10b99a
+        );
+
+    color:
+        #073c33;
+
+    font-size: 22px;
+
+    transition:
+        all 0.35s ease;
+
+}
+
+
+/* ICON HOVER */
+
+.gate-registration-link:hover
+.gate-registration-icon {
+
+    transform:
+        rotate(-8deg)
+        scale(1.08);
+
+    color:
+        white;
+
+    box-shadow:
+        0 8px 18px
+        rgba(16, 185, 154, 0.3);
+
+}
+
+
+/* =========================================
+   TEXT AREA
+========================================= */
+
+.gate-registration-text {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+}
+
+
+.gate-registration-text span {
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color:
+        #10a98d;
+
+}
+
+
+.gate-registration-text strong {
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    color:
+        #18302d;
+
+    transition:
+        color 0.3s ease;
+
+}
+
+
+.gate-registration-text small {
+
+    font-size: 11px;
+
+    color:
+        #72827f;
+
+}
+
+
+/* TEXT HOVER */
+
+.gate-registration-link:hover
+.gate-registration-text strong {
+
+    color:
+        #10a98d;
+
+}
+
+
+/* =========================================
+   ARROW
+========================================= */
+
+.gate-registration-arrow {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        white;
+
+    color:
+        #10b99a;
+
+    font-size: 14px;
+
+    transition:
+        all 0.35s ease;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.06);
+
+}
+
+
+/* ARROW HOVER */
+
+.gate-registration-link:hover
+.gate-registration-arrow {
+
+    transform:
+        translateX(6px);
+
+    background:
+        #10b99a;
+
+    color:
+        white;
+
+}
+
+
+/* =========================================
+   GLOW EFFECT
+========================================= */
+
+.gate-registration-link::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+
+    height: 100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(29, 226, 189, 0.12);
+
+    right: -40px;
+
+    top: -40px;
+
+    transition:
+        all 0.5s ease;
+
+}
+
+
+.gate-registration-link:hover::before {
+
+    transform:
+        scale(2);
+
+}
+
+
+/* KEEP CONTENT ABOVE GLOW */
+
+.gate-registration-icon,
+.gate-registration-text,
+.gate-registration-arrow {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .gate-registration-link {
+
+        padding: 14px;
+
+        gap: 12px;
+
+    }
+
+
+    .gate-registration-icon {
+
+        width: 46px;
+
+        height: 46px;
+
+        min-width: 46px;
+
+        font-size: 19px;
+
+    }
+
+
+    .gate-registration-text strong {
+
+        font-size: 13px;
+
+    }
+
+
+    .gate-registration-text small {
+
+        font-size: 10px;
+
+    }
+
+
+    .gate-registration-arrow {
+
+        width: 34px;
+
+        height: 34px;
+
+    }
+
+}

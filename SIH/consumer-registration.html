@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>KisanLink - Consumer Registration</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="registration.css">
+
+    <link rel="stylesheet"
+          href="SIH.css">
+
+    <!-- EXTRA BUTTON CSS -->
+    <style>
+
+        /* =========================================
+           TOP GATE STAFF REGISTRATION BUTTON
+        ========================================= */
+
+        .top-gate-registration {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .gate-registration-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 13px 22px;
+
+            background: #1de2bd;
+            color: #153c3a;
+
+            text-decoration: none;
+
+            font-family: "DM Sans", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+
+            border-radius: 10px;
+
+            box-shadow: 0 8px 20px rgba(29, 226, 189, 0.25);
+
+            transition: 0.3s ease;
+        }
+
+        .gate-registration-btn:hover {
+            background: #10b99a;
+            color: white;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 12px 25px rgba(29, 226, 189, 0.35);
+        }
+
+        @media (max-width: 768px) {
+
+            .top-gate-registration {
+                top: 15px;
+                right: 15px;
+            }
+
+            .gate-registration-btn {
+                padding: 10px 14px;
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP GATE STAFF REGISTRATION BUTTON
+====================================================== -->
+
+<div class="top-gate-registration">
+
+    <a href="gatereg.html"
+       class="gate-registration-btn">
+
+        <i class="fa-solid fa-id-card"></i>
+
+        <span>
+            Gate Staff Registration
+        </span>
+
+    </a>
+
+</div>
+
+
+<div class="page-wrapper">
+
+
+    <!-- =====================================================
+         LEFT AGRICULTURE IMAGE SECTION
+    ====================================================== -->
+
+    <div class="register-image consumer-image">
+
+        <div class="image-overlay">
+
+
+            <!-- LOGO -->
+
+            <div class="brand">
+
+                <i class="fa-solid fa-seedling"></i>
+
+                KisanLink
+
+            </div>
+
+
+            <!-- LABEL -->
+
+            <span class="image-label"
+                  data-lang="consumerPageLabel">
+
+                FOR CONSUMERS
+
+            </span>
+
+
+            <!-- HEADING -->
+
+            <h1 data-lang="consumerPageTitle">
+
+                Fresh Products.
+                Direct From Farmers.
+
+            </h1>
+
+
+            <!-- DESCRIPTION -->
+
+            <p data-lang="consumerPageText">
+
+                Discover fresh agricultural products
+                from trusted farmers near you.
+
+            </p>
+
+
+            <!-- BENEFITS -->
+
+            <div class="image-points">
+
+
+                <!-- BENEFIT 1 -->
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span data-lang="consumerBenefit1">
+
+                        Discover fresh products
+
+                    </span>
+
+                </div>
+
+
+                <!-- BENEFIT 2 -->
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span data-lang="consumerBenefit2">
+
+                        Connect with farmers
+
+                    </span>
+
+                </div>
+
+
+                <!-- BENEFIT 3 -->
+
+                <div>
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span data-lang="consumerBenefit3">
+
+                        Buy directly from farmers
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RIGHT REGISTRATION SECTION
+    ====================================================== -->
+
+    <div class="form-section">
+
+
+        <div class="form-container">
+
+
+            <!-- BACK TO HOME -->
+
+            <a href="SIH.html"
+               class="back-home">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span data-lang="backHome">
+
+                    Back to Home
+
+                </span>
+
+            </a>
+
+
+
+            <!-- =================================================
+                 FORM HEADER
+            ================================================== -->
+
+            <div class="form-header">
+
+
+                <span class="form-label"
+                      data-lang="consumerRegistration">
+
+                    CONSUMER REGISTRATION
+
+                </span>
+
+
+                <h2 data-lang="consumerCreate">
+
+                    Create Your Consumer Account
+
+                </h2>
+
+
+                <p data-lang="consumerFormText">
+
+                    Register your business to connect
+                    with agricultural suppliers.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CONSUMER REGISTRATION FORM
+            ================================================== -->
+
+            <form action="C_dash.html"
+                  method="get">
+
+
+                <!-- FULL NAME -->
+
+                <div class="input-group">
+
+                    <label for="fullName"
+                           data-lang="fullName">
+
+                        Full Name
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-user"></i>
+
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SHOP / BUSINESS NAME -->
+
+                <div class="input-group">
+
+                    <label for="shopName"
+                           data-lang="shopName">
+
+                        Shop / Business Name
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-store"></i>
+
+
+                        <input
+                            type="text"
+                            id="shopName"
+                            name="shopName"
+                            placeholder="Enter shop or business name"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PHONE NUMBER -->
+
+                <div class="input-group">
+
+                    <label for="phone"
+                           data-lang="mobile">
+
+                        Phone Number
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-phone"></i>
+
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter 10 digit phone number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            inputmode="numeric"
+                            autocomplete="tel"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- LOCATION -->
+
+                <div class="input-group">
+
+                    <label for="location"
+                           data-lang="location">
+
+                        Location
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+
+                        <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            placeholder="City / District / State"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label for="email"
+                           data-lang="email">
+
+                        Email Address
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter email address"
+                            autocomplete="email"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label for="password"
+                           data-lang="password">
+
+                        Password
+
+                    </label>
+
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            autocomplete="new-password"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BUSINESS LICENSE -->
+
+                <div class="input-group">
+
+                    <label for="license"
+                           data-lang="license">
+
+                        Business License
+
+                    </label>
+
+
+                    <label class="upload-box">
+
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+
+
+                        <span data-lang="uploadLicense">
+
+                            Upload Business License
+
+                        </span>
+
+
+                        <small data-lang="licenseFormat">
+
+                            JPG / JPEG only
+
+                        </small>
+
+
+                        <input
+                            type="file"
+                            id="license"
+                            name="license"
+                            accept=".jpg,.jpeg,image/jpeg"
+                            required>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- TERMS AND CONDITIONS -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        id="terms"
+                        name="terms"
+                        required>
+
+
+                    <span data-lang="terms">
+
+                        I agree to the Terms & Conditions
+
+                    </span>
+
+                </label>
+
+
+
+                <!-- SUBMIT BUTTON -->
+
+                <button
+                    type="button"
+                    class="submit-btn"
+                    onclick="window.location.href='./C_dash.html';">
+
+                    <span data-lang="createConsumer">
+
+                        Create Consumer Account
+
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     LANGUAGE JAVASCRIPT
+====================================================== -->
+
+<script src="language.js"></script>
+
+
+</body>
+
+</html>

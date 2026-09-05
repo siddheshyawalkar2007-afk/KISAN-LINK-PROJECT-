@@ -1,0 +1,15 @@
+KisanLink - FIXED RUN INSTRUCTIONS
+
+1. Open this folder in VS Code.
+2. Open Terminal.
+3. Run: npm install
+4. Run: npm run dev
+5. Open the URL Vite prints (configured for http://localhost:5173/).
+
+FIXES:
+- Fixed Crop Declaration Step 1 -> Government Requirements Step 2 navigation.
+- Removed the stale quantityQuintals reference from App.tsx.
+- Kept Crop Declaration location data while passing it correctly to Step 2.
+- Made removed harvest/logistics fields optional in CropEntry.
+- Removed the hard-coded port 3000 from package.json dev script.
+- Vite config uses port 5173 with strictPort enabled.

@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KisanLink - Farmer Registration</title>
+
+    <link rel="stylesheet" href="registration.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="SIH.css">
+</head>
+
+<body>
+
+<div class="page-wrapper">
+
+    <!-- ================= IMAGE SECTION ================= -->
+
+    <div class="register-image farmer-image">
+
+        <div class="image-overlay">
+
+            <div class="brand">
+                <i class="fa-solid fa-seedling"></i>
+                KisanLink
+            </div>
+
+            <span class="image-label">
+                FOR FARMERS
+            </span>
+
+            <h1>
+                Grow Your Business.
+                Reach More Consumers.
+            </h1>
+
+            <p>
+                List your agricultural products,
+                manage prices and connect directly
+                with consumers.
+            </p>
+
+            <div class="image-points">
+
+                <div>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Sell directly to consumers</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Manage your products</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Set your own prices</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FORM SECTION ================= -->
+
+    <div class="form-section">
+
+        <div class="form-container">
+
+            <a href="SIH.html" class="back-home">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back to Home</span>
+            </a>
+
+
+            <div class="form-header">
+
+                <span class="form-label">
+                    FARMER REGISTRATION
+                </span>
+
+                <h2>
+                    Create Your Farmer Account
+                </h2>
+
+                <p>
+                    Enter your details to create your
+                    KisanLink farmer profile.
+                </p>
+
+            </div>
+
+
+            <!-- ================= FORM ================= -->
+
+            <form id="farmerForm">
+
+                <!-- NAME -->
+
+                <div class="input-group">
+
+                    <label>
+                        Full Name
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <input
+                            type="text"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MOBILE -->
+
+                <div class="input-group">
+
+                    <label>
+                        Mobile Number
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                            type="tel"
+                            name="mobile"
+                            placeholder="Enter mobile number"
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DOB -->
+
+                <div class="input-group">
+
+                    <label>
+                        Date of Birth
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <input
+                            type="date"
+                            name="dob"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter email address"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOCATION -->
+
+                <div class="input-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="Village / City / District"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="input-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Create a password"
+                            minlength="4"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 7/12 LICENSE -->
+
+                <div class="input-group">
+
+                    <label>
+                        7/12 License Code
+                    </label>
+
+                    <div class="input-box">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                        <input
+                            type="text"
+                            name="licenseCode"
+                            placeholder="Enter the 7/12 code"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= BANK DETAILS ================= -->
+
+                <div class="bank-details-section">
+
+                    <div class="bank-section-header">
+
+                        <div class="bank-title">
+
+                            <div class="bank-icon">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+
+                            <div>
+
+                                <span>
+                                    BANK DETAILS
+                                </span>
+
+                                <h3>
+                                    Add Your Bank Account
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="bank-required">
+                            All fields required
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACCOUNT HOLDER -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Account Holder Name
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                                type="text"
+                                id="accountHolderName"
+                                name="accountHolderName"
+                                placeholder="Enter account holder name"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BANK SELECT -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Bank Name
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="bank-select" id="bankSelect">
+
+                            <div class="selected-bank" id="selectedBank">
+
+                                <div class="bank-placeholder">
+
+                                    <i class="fa-solid fa-building-columns"></i>
+
+                                    <span>
+                                        Select your bank
+                                    </span>
+
+                                </div>
+
+                                <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+
+                            </div>
+
+
+                            <div class="bank-options" id="bankOptions">
+
+                                <div
+                                    class="bank-option"
+                                    data-value="State Bank of India">
+
+                                    <span>
+                                        State Bank of India
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="bank-option"
+                                    data-value="HDFC Bank">
+
+                                    <span>
+                                        HDFC Bank
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="bank-option"
+                                    data-value="India Post Payments Bank">
+
+                                    <span>
+                                        India Post Payments Bank
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="bank-option"
+                                    data-value="Kotak Mahindra Bank">
+
+                                    <span>
+                                        Kotak Mahindra Bank
+                                    </span>
+
+                                </div>
+
+
+                                <div
+                                    class="bank-option"
+                                    data-value="Punjab National Bank">
+
+                                    <span>
+                                        Punjab National Bank
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            id="bankName"
+                            name="bankName"
+                            required>
+
+                    </div>
+
+
+                    <!-- ACCOUNT NUMBER -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Account Number
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-credit-card"></i>
+
+                            <input
+                                type="text"
+                                id="accountNumber"
+                                name="accountNumber"
+                                placeholder="Enter account number"
+                                inputmode="numeric"
+                                pattern="[0-9]{9,18}"
+                                maxlength="18"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM ACCOUNT -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Confirm Account Number
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-credit-card"></i>
+
+                            <input
+                                type="text"
+                                id="confirmAccountNumber"
+                                name="confirmAccountNumber"
+                                placeholder="Re-enter account number"
+                                inputmode="numeric"
+                                pattern="[0-9]{9,18}"
+                                maxlength="18"
+                                required>
+
+                        </div>
+
+                        <small
+                            id="accountError"
+                            class="bank-error">
+
+                            Account numbers do not match.
+
+                        </small>
+
+                    </div>
+
+
+                    <!-- IFSC -->
+
+                    <div class="input-group">
+
+                        <label>
+                            IFSC Code
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-code"></i>
+
+                            <input
+                                type="text"
+                                id="ifscCode"
+                                name="ifscCode"
+                                placeholder="Example: SBIN0001234"
+                                pattern="[A-Za-z]{4}0[A-Za-z0-9]{6}"
+                                maxlength="11"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACCOUNT TYPE -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Account Type
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                            <select
+                                id="accountType"
+                                name="accountType"
+                                required>
+
+                                <option value="">
+                                    Select account type
+                                </option>
+
+                                <option value="Savings">
+                                    Savings Account
+                                </option>
+
+                                <option value="Current">
+                                    Current Account
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BRANCH -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Branch Name
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-code-branch"></i>
+
+                            <input
+                                type="text"
+                                id="branchName"
+                                name="branchName"
+                                placeholder="Enter branch name"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BRANCH ADDRESS -->
+
+                    <div class="input-group">
+
+                        <label>
+                            Branch Address
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <textarea
+                                id="branchAddress"
+                                name="branchAddress"
+                                placeholder="Enter complete branch address"
+                                required></textarea>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VERIFICATION -->
+
+                    <div class="verification-box">
+
+                        <div class="verification-info">
+
+                            <div class="verification-icon">
+
+                                <i class="fa-solid fa-shield-halved"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h4>
+                                    Verify Bank Details
+                                </h4>
+
+                                <p id="verificationMessage">
+                                    Please fill all bank details
+                                    before verification.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="verifyBankBtn"
+                            class="verify-bank-btn">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Verify Bank Details
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- VERIFIED -->
+
+                    <div
+                        id="verifiedStatus"
+                        class="verified-status">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <span>
+                            Bank details verified successfully
+                        </span>
+
+                    </div>
+
+
+                    <input
+                        type="hidden"
+                        id="bankVerified"
+                        name="bankVerified"
+                        value="false">
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <label class="terms">
+
+                    <input
+                        type="checkbox"
+                        name="terms"
+                        required>
+
+                    <span>
+                        I agree to the Terms & Conditions
+                    </span>
+
+                </label>
+
+
+                <!-- ================= SUBMIT ================= -->
+
+                <!-- IMPORTANT:
+                     DO NOT put <a> inside this button -->
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                    id="submitBtn">
+
+                    <span>
+                        Create Farmer Account
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+const farmerForm =
+    document.getElementById("farmerForm");
+
+const verifyBankBtn =
+    document.getElementById("verifyBankBtn");
+
+const bankVerified =
+    document.getElementById("bankVerified");
+
+const verifiedStatus =
+    document.getElementById("verifiedStatus");
+
+const verificationMessage =
+    document.getElementById("verificationMessage");
+
+const accountNumber =
+    document.getElementById("accountNumber");
+
+const confirmAccountNumber =
+    document.getElementById("confirmAccountNumber");
+
+const accountError =
+    document.getElementById("accountError");
+
+const bankName =
+    document.getElementById("bankName");
+
+const ifscCode =
+    document.getElementById("ifscCode");
+
+
+
+/* =====================================================
+   BANK VERIFICATION
+===================================================== */
+
+verifyBankBtn.addEventListener(
+    "click",
+    function () {
+
+        const bankFields = [
+
+            "accountHolderName",
+            "bankName",
+            "accountNumber",
+            "confirmAccountNumber",
+            "ifscCode",
+            "accountType",
+            "branchName",
+            "branchAddress"
+
+        ];
+
+
+        let allFilled = true;
+
+
+        bankFields.forEach(
+            function (fieldId) {
+
+                const field =
+                    document.getElementById(fieldId);
+
+
+                if (!field.value.trim()) {
+
+                    field.classList.add(
+                        "input-error"
+                    );
+
+                    allFilled = false;
+
+                }
+                else {
+
+                    field.classList.remove(
+                        "input-error"
+                    );
+
+                }
+
+            }
+        );
+
+
+        if (!allFilled) {
+
+            verificationMessage.textContent =
+                "Please fill all bank details before verification.";
+
+            verificationMessage.classList.add(
+                "error-message"
+            );
+
+            return;
+
+        }
+
+
+        /* ACCOUNT MATCH */
+
+        if (
+            accountNumber.value.trim() !==
+            confirmAccountNumber.value.trim()
+        ) {
+
+            accountError.style.display =
+                "block";
+
+            accountNumber.classList.add(
+                "input-error"
+            );
+
+            confirmAccountNumber.classList.add(
+                "input-error"
+            );
+
+            verificationMessage.textContent =
+                "Account numbers do not match.";
+
+            verificationMessage.classList.add(
+                "error-message"
+            );
+
+            return;
+
+        }
+
+
+        /* ACCOUNT LENGTH */
+
+        if (
+            accountNumber.value.length < 9 ||
+            accountNumber.value.length > 18
+        ) {
+
+            verificationMessage.textContent =
+                "Please enter a valid account number.";
+
+            verificationMessage.classList.add(
+                "error-message"
+            );
+
+            return;
+
+        }
+
+
+        /* IFSC */
+
+        const ifscPattern =
+            /^[A-Za-z]{4}0[A-Za-z0-9]{6}$/;
+
+
+        if (
+            !ifscPattern.test(
+                ifscCode.value.trim()
+            )
+        ) {
+
+            verificationMessage.textContent =
+                "Please enter a valid 11-character IFSC code.";
+
+            verificationMessage.classList.add(
+                "error-message"
+            );
+
+            ifscCode.classList.add(
+                "input-error"
+            );
+
+            return;
+
+        }
+
+
+        /* SUCCESS */
+
+        bankVerified.value =
+            "true";
+
+
+        verifiedStatus.classList.add(
+            "show"
+        );
+
+
+        verificationMessage.classList.remove(
+            "error-message"
+        );
+
+
+        verificationMessage.textContent =
+            "Your bank information has been verified.";
+
+
+        verifyBankBtn.innerHTML =
+            '<i class="fa-solid fa-circle-check"></i> Bank Verified';
+
+
+        verifyBankBtn.classList.add(
+            "verified"
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   FORM SUBMIT
+===================================================== */
+
+farmerForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+
+        /* BANK VERIFICATION */
+
+        if (
+            bankVerified.value !==
+            "true"
+        ) {
+
+            alert(
+                "Please fill all bank details and verify your bank account before creating your farmer account."
+            );
+
+            document
+                .querySelector(
+                    ".bank-details-section"
+                )
+                .scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            return;
+
+        }
+
+
+        /* ACCOUNT MATCH */
+
+        if (
+            accountNumber.value !==
+            confirmAccountNumber.value
+        ) {
+
+            alert(
+                "Account numbers do not match."
+            );
+
+            confirmAccountNumber.focus();
+
+            return;
+
+        }
+
+
+        /* ==========================================
+           REGISTRATION SUCCESS
+           
+           Change this URL if your login/dashboard
+           page has a different filename.
+        ========================================== */
+
+        window.location.href =
+            "http://localhost:5173/";
+
+    }
+);
+
+
+
+/* =====================================================
+   REMOVE VERIFIED STATUS WHEN BANK DATA CHANGES
+===================================================== */
+
+const bankInputs =
+    document.querySelectorAll(
+        ".bank-details-section input, " +
+        ".bank-details-section select, " +
+        ".bank-details-section textarea"
+    );
+
+
+bankInputs.forEach(
+    function (input) {
+
+        input.addEventListener(
+            "input",
+            function () {
+
+                if (
+                    input.id ===
+                    "bankVerified"
+                ) {
+                    return;
+                }
+
+
+                bankVerified.value =
+                    "false";
+
+
+                verifiedStatus.classList.remove(
+                    "show"
+                );
+
+
+                verifyBankBtn.innerHTML =
+                    '<i class="fa-solid fa-circle-check"></i> Verify Bank Details';
+
+
+                verifyBankBtn.classList.remove(
+                    "verified"
+                );
+
+
+                verificationMessage.textContent =
+                    "Please verify your bank details again.";
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   ACCOUNT NUMBER MATCH
+===================================================== */
+
+confirmAccountNumber.addEventListener(
+    "input",
+    function () {
+
+        if (
+            accountNumber.value &&
+            confirmAccountNumber.value &&
+            accountNumber.value !==
+            confirmAccountNumber.value
+        ) {
+
+            accountError.style.display =
+                "block";
+
+        }
+        else {
+
+            accountError.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   IFSC UPPERCASE
+===================================================== */
+
+ifscCode.addEventListener(
+    "input",
+    function () {
+
+        this.value =
+            this.value.toUpperCase();
+
+    }
+);
+
+
+
+/* =====================================================
+   BANK SELECTOR
+===================================================== */
+
+const bankSelect =
+    document.getElementById("bankSelect");
+
+const selectedBank =
+    document.getElementById("selectedBank");
+
+const bankOptions =
+    document.getElementById("bankOptions");
+
+
+
+/* OPEN / CLOSE */
+
+selectedBank.addEventListener(
+    "click",
+    function (event) {
+
+        event.stopPropagation();
+
+        bankSelect.classList.toggle(
+            "active"
+        );
+
+    }
+);
+
+
+
+/* SELECT BANK */
+
+document
+    .querySelectorAll(".bank-option")
+    .forEach(
+        function (option) {
+
+            option.addEventListener(
+                "click",
+                function () {
+
+                    const value =
+                        this.getAttribute(
+                            "data-value"
+                        );
+
+
+                    const name =
+                        this
+                            .querySelector("span")
+                            .textContent
+                            .trim();
+
+
+                    bankName.value =
+                        value;
+
+
+                    selectedBank.innerHTML = `
+
+                        <div class="selected-bank-name">
+
+                            <i class="fa-solid fa-building-columns"></i>
+
+                            <span>
+                                ${name}
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+
+                    `;
+
+
+                    document
+                        .querySelectorAll(
+                            ".bank-option"
+                        )
+                        .forEach(
+                            function (item) {
+
+                                item.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                    this.classList.add(
+                        "selected"
+                    );
+
+
+                    bankSelect.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+);
+
+
+
+/* CLOSE OUTSIDE */
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            !bankSelect.contains(
+                event.target
+            )
+        ) {
+
+            bankSelect.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

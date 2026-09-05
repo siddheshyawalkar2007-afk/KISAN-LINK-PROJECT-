@@ -1,0 +1,2398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KisanLink — Farmer Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* =====================================================
+                   RESET
+                ===================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f2f5f3;
+            color: #1a2a1f;
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+                   NAVBAR
+                ===================================================== */
+        .navbar {
+            height: 72px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            border-bottom: 1px solid #e2e8e4;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a7a3e;
+        }
+
+        .logo i {
+            font-size: 26px;
+        }
+
+        .hamburger {
+            width: 42px;
+            height: 42px;
+            border: none;
+            border-radius: 10px;
+            background: #f0f6f1;
+            color: #1a7a3e;
+            cursor: pointer;
+            font-size: 19px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .hamburger:hover {
+            background: #dcecdf;
+        }
+
+        /* ---- Nav Right ---- */
+        .notification-wrapper {
+            position: relative;
+        }
+
+        .notification-btn {
+            width: 42px;
+            height: 42px;
+            border: none;
+            background: #f5f7f5;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 19px;
+            color: #2d3d32;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-btn:hover {
+            background: #e8ede9;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 10px;
+            height: 10px;
+            background: #d94a4a;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            display: none;
+            transition: opacity 0.25s;
+        }
+
+        .notification-dot.visible {
+            display: block;
+        }
+
+        .top-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 4px 8px 4px 4px;
+            border-radius: 50px;
+            transition: background 0.2s;
+        }
+
+        .top-profile:hover {
+            background: #f0f5f1;
+        }
+
+        .profile-image {
+            width: 42px;
+            height: 42px;
+            background: #dcefe0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a7a3e;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .profile-name {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            line-height: 1.3;
+        }
+
+        .profile-name strong {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .profile-name small {
+            font-size: 12px;
+            color: #7a877c;
+        }
+
+        .top-profile>i {
+            font-size: 12px;
+            color: #7a877c;
+            margin-left: 2px;
+        }
+
+        /* ---- Notification Panel ---- */
+        .notification-panel {
+            position: absolute;
+            right: 0;
+            top: 56px;
+            width: 370px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.10);
+            border: 1px solid #e2e8e4;
+            display: none;
+            overflow: hidden;
+            z-index: 1100;
+        }
+
+        .notification-panel.show {
+            display: block;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 20px;
+            border-bottom: 1px solid #edf2ee;
+        }
+
+        .notification-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .notification-header span {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #d94a4a;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .notification-list {
+            max-height: 340px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            display: flex;
+            gap: 14px;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f4f1;
+            transition: background 0.15s;
+        }
+
+        .notification-item:hover {
+            background: #f8fbf9;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            min-width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #e8f5eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a7a3e;
+            font-size: 17px;
+        }
+
+        .notification-item .content {
+            flex: 1;
+        }
+
+        .notification-item .content strong {
+            font-size: 14px;
+            font-weight: 600;
+            display: block;
+            color: #1a2a1f;
+        }
+
+        .notification-item .content p {
+            font-size: 13px;
+            color: #6a7a6e;
+            margin-top: 3px;
+        }
+
+        .notification-item .content small {
+            display: block;
+            color: #a0ada3;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .notification-empty {
+            padding: 32px 20px;
+            text-align: center;
+            color: #8a9a8e;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+                   SIDEBAR
+                ===================================================== */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 72px;
+            width: 264px;
+            height: calc(100vh - 72px);
+            background: #ffffff;
+            border-right: 1px solid #e2e8e4;
+            z-index: 900;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateX(0);
+            overflow-y: auto;
+        }
+
+        .sidebar-profile {
+            padding: 28px 20px 22px;
+            text-align: center;
+            border-bottom: 1px solid #edf2ee;
+            flex-shrink: 0;
+        }
+
+        .big-profile {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: #e3f2e6;
+            color: #1a7a3e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+        }
+
+        .sidebar-profile h3 {
+            margin-top: 12px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .sidebar-profile .role-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: #7a877c;
+            margin-top: 4px;
+            background: #f0f6f1;
+            padding: 4px 14px;
+            border-radius: 50px;
+        }
+
+        .sidebar-profile .role-badge i {
+            font-size: 7px;
+            color: #2a9d54;
+        }
+
+        .side-menu {
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .side-link {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: #5d6e62;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.15s;
+        }
+
+        .side-link:hover {
+            background: #f0f7f1;
+            color: #1a7a3e;
+        }
+
+        .side-link.active {
+            background: #e5f3e8;
+            color: #1a7a3e;
+            font-weight: 600;
+        }
+
+        .side-link i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .sidebar-bottom {
+            margin-top: auto;
+            padding: 16px 20px 24px;
+            border-top: 1px solid #edf2ee;
+            flex-shrink: 0;
+        }
+
+        .logout-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #fef0ef;
+            color: #cc4a42;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #fce4e2;
+        }
+
+        /* =====================================================
+                   OVERLAY
+                ===================================================== */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.30);
+            z-index: 850;
+            backdrop-filter: blur(2px);
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* =====================================================
+                   MAIN
+                ===================================================== */
+        .main-container {
+            margin-left: 264px;
+            padding: 32px 36px 60px;
+            max-width: 1600px;
+            min-height: calc(100vh - 72px);
+        }
+
+        /* =====================================================
+                   WELCOME
+                ===================================================== */
+        .welcome-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .welcome-small {
+            color: #7a877c;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+
+        .welcome-section h1 {
+            font-size: 30px;
+            font-weight: 700;
+            color: #1a2a1f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .welcome-text {
+            margin-top: 6px;
+            color: #6a7a6e;
+            font-size: 15px;
+        }
+
+        .verified {
+            display: inline-flex;
+            width: 24px;
+            height: 24px;
+            background: #1a73d9;
+            color: #fff;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .dashboard-date {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: #ffffff;
+            border: 1px solid #e2e8e4;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .dashboard-date>i {
+            color: #1a7a3e;
+            font-size: 20px;
+        }
+
+        .dashboard-date div {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .dashboard-date small {
+            color: #8a9a8e;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dashboard-date strong {
+            font-size: 15px;
+            color: #1a2a1f;
+        }
+
+        /* =====================================================
+                   STATS
+                ===================================================== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border: 1px solid #e2e8e4;
+            border-radius: 14px;
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.green {
+            background: #e7f5e9;
+            color: #1a823f;
+        }
+        .stat-icon.blue {
+            background: #e8f1fb;
+            color: #2976c7;
+        }
+        .stat-icon.orange {
+            background: #fff1df;
+            color: #d9831f;
+        }
+
+        .stat-card .info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-card .info span {
+            font-size: 12px;
+            color: #8a9a8e;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .stat-card .info strong {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a2a1f;
+        }
+
+        /* =====================================================
+                   SECTIONS
+                ===================================================== */
+        .dashboard-section {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e8e4;
+            border-radius: 18px;
+            padding: 28px 30px;
+            margin-bottom: 28px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            animation: fadeSlide 0.3s ease;
+        }
+
+        .dashboard-section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .section-tag {
+            font-size: 11px;
+            color: #1a7a3e;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 4px;
+            color: #1a2a1f;
+        }
+
+        .section-heading p {
+            color: #6a7a6e;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .edit-button,
+        .print-button {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .edit-button {
+            background: #e8f5eb;
+            color: #1a7a3e;
+        }
+
+        .edit-button:hover {
+            background: #d4ecda;
+        }
+
+        .print-button {
+            background: #1a2a1f;
+            color: #fff;
+        }
+
+        .print-button:hover {
+            background: #0f1e14;
+        }
+
+        /* =====================================================
+                   PROFILE
+                ===================================================== */
+        .information-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .information-box {
+            padding: 16px 18px;
+            background: #f8faf8;
+            border: 1px solid #edf2ee;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .information-box span {
+            color: #7a877c;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .information-box strong {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .quantity-edit {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity-edit input {
+            width: 110px;
+            padding: 8px 12px;
+            border: 1px solid #d6ddd7;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            background: #fff;
+            transition: border 0.2s;
+        }
+
+        .quantity-edit input:focus {
+            outline: none;
+            border-color: #1a7a3e;
+            box-shadow: 0 0 0 3px rgba(26, 122, 62, 0.10);
+        }
+
+        .quantity-edit span {
+            font-weight: 600;
+            color: #1a2a1f;
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+                   LICENSE
+                ===================================================== */
+        .license-card {
+            border-radius: 16px;
+            background: linear-gradient(135deg, #e9f7ec, #f7fbf8);
+            border: 1px solid #cde5d1;
+            padding: 24px 28px;
+        }
+
+        .license-top {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #d7e8da;
+        }
+
+        .license-symbol {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a7a3e;
+            font-size: 24px;
+        }
+
+        .license-top .info span {
+            font-size: 11px;
+            color: #7a877c;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .license-top .info h3 {
+            margin-top: 3px;
+            color: #1a7a3e;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .license-top .info h3 i {
+            font-size: 18px;
+        }
+
+        .license-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px 30px;
+            margin-top: 20px;
+        }
+
+        .license-details div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .license-details span {
+            color: #7a877c;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+        }
+
+        .license-details strong {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        /* =====================================================
+                   CONSUMER CARDS
+                ===================================================== */
+        .consumer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .consumer-card {
+            border: 1px solid #e2e8e4;
+            border-radius: 16px;
+            padding: 20px 22px;
+            background: #ffffff;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .consumer-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 32px rgba(26, 42, 31, 0.07);
+            border-color: #c8d9cd;
+        }
+
+        .consumer-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #edf2ee;
+        }
+
+        .consumer-avatar {
+            min-width: 46px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #dff1e3;
+            color: #1a7a3e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .consumer-avatar.purple {
+            background: #eee5fa;
+            color: #7643a8;
+        }
+        .consumer-avatar.blue-avatar {
+            background: #e4effb;
+            color: #2c70b3;
+        }
+
+        .consumer-header .name-wrap h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .consumer-header .name-wrap span {
+            font-size: 12px;
+            color: #8a9a8e;
+        }
+
+        .available-badge {
+            margin-left: auto;
+            background: #e7f6ea;
+            color: #1a7a3e;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .consumer-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 16px 0 18px;
+            flex: 1;
+        }
+
+        .consumer-info .row {
+            display: grid;
+            grid-template-columns: 22px 1fr;
+            column-gap: 8px;
+            align-items: center;
+        }
+
+        .consumer-info .row i {
+            color: #1a7a3e;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .consumer-info .row .label {
+            color: #8a9a8e;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            font-weight: 500;
+        }
+
+        .consumer-info .row .value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a2a1f;
+            word-break: break-word;
+        }
+
+        .book-button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #1a7a3e;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.2s, transform 0.1s;
+            margin-top: 4px;
+        }
+
+        .book-button:hover {
+            background: #136633;
+        }
+
+        .book-button:active {
+            transform: scale(0.98);
+        }
+
+        /* =====================================================
+                   HISTORY
+                ===================================================== */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border: 1px solid #e7ece8;
+            border-radius: 12px;
+            background: #fafcfa;
+            transition: background 0.15s;
+        }
+
+        .history-item:hover {
+            background: #f5f9f6;
+        }
+
+        .history-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: #e8f5eb;
+            color: #1a7a3e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .history-info {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex: 1;
+        }
+
+        .history-info strong {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .history-info .meta {
+            font-size: 12px;
+            color: #6a7a6e;
+        }
+
+        .history-info .meta span {
+            margin-right: 8px;
+        }
+
+        .history-info small {
+            color: #8a9a8e;
+            font-size: 11px;
+        }
+
+        .status {
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
+        }
+
+        .status.confirmed {
+            color: #1a7a3e;
+            background: #e8f6eb;
+        }
+
+        .status.pending {
+            color: #b46d11;
+            background: #fff1dd;
+        }
+
+        /* =====================================================
+                   FEEDBACK
+                ===================================================== */
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .feedback-card {
+            padding: 20px 22px;
+            border: 1px solid #e6ebe7;
+            border-radius: 14px;
+            background: #fafcfa;
+            transition: border-color 0.2s;
+        }
+
+        .feedback-card:hover {
+            border-color: #c8d9cd;
+        }
+
+        .feedback-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feedback-user .name-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .feedback-user .name-wrap strong {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .feedback-user .name-wrap small {
+            color: #8a9a8e;
+            font-size: 12px;
+        }
+
+        .stars {
+            color: #e7a526;
+            letter-spacing: 3px;
+            margin: 12px 0 10px;
+            font-size: 16px;
+        }
+
+        .feedback-card p {
+            color: #4d5e52;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .feedback-card .date {
+            color: #a0ada3;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+                   REQUESTS
+                ===================================================== */
+        #requestList {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .request-card {
+            border: 1px solid #e2e8e4;
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: grid;
+            grid-template-columns: 200px 1fr auto;
+            gap: 20px;
+            align-items: center;
+            background: #fafcfa;
+            transition: border-color 0.2s;
+        }
+
+        .request-card:hover {
+            border-color: #c8d9cd;
+        }
+
+        .request-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .request-user .name-wrap h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .request-user .name-wrap span {
+            font-size: 12px;
+            color: #8a9a8e;
+        }
+
+        .request-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px 16px;
+        }
+
+        .request-details span {
+            font-size: 13px;
+            color: #4d5e52;
+        }
+
+        .request-details span b {
+            color: #1a2a1f;
+            font-weight: 600;
+        }
+
+        .request-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .accept-btn,
+        .reject-btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.15s;
+            min-width: 100px;
+        }
+
+        .accept-btn {
+            background: #1a7a3e;
+            color: #fff;
+        }
+
+        .accept-btn:hover {
+            background: #136633;
+        }
+
+        .reject-btn {
+            background: #fef0ef;
+            color: #cc4a42;
+        }
+
+        .reject-btn:hover {
+            background: #fce4e2;
+        }
+
+        .request-empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: #8a9a8e;
+            font-size: 15px;
+        }
+
+        .request-empty i {
+            font-size: 40px;
+            color: #d6ddd7;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* =====================================================
+                   TICKET
+                ===================================================== */
+        .ticket {
+            border: 2px dashed #cbd9ce;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        .ticket-header {
+            background: #e9f6eb;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ticket-header .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1a7a3e;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .ticket-header .brand i {
+            font-size: 20px;
+        }
+
+        .ticket-header .badge {
+            font-size: 10px;
+            font-weight: 700;
+            color: #1a7a3e;
+            background: rgba(26, 122, 62, 0.12);
+            padding: 4px 14px;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .ticket-body {
+            display: grid;
+            grid-template-columns: 1fr 70px 1fr;
+            align-items: center;
+            padding: 32px 30px;
+            text-align: center;
+        }
+
+        .ticket-person span {
+            font-size: 10px;
+            color: #8a9a8e;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .ticket-person h3 {
+            margin: 8px 0 4px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a2a1f;
+        }
+
+        .ticket-person p {
+            color: #6a7a6e;
+            font-size: 13px;
+            margin-top: 2px;
+        }
+
+        .ticket-arrow {
+            width: 48px;
+            height: 48px;
+            margin: auto;
+            background: #e9f6eb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a7a3e;
+            font-size: 18px;
+        }
+
+        .ticket-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid #edf2ee;
+            border-bottom: 1px solid #edf2ee;
+        }
+
+        .ticket-details div {
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border-right: 1px solid #edf2ee;
+        }
+
+        .ticket-details div:last-child {
+            border-right: none;
+        }
+
+        .ticket-details span {
+            color: #8a9a8e;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .ticket-details strong {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a2a1f;
+        }
+
+        .ticket-number {
+            text-align: center;
+            padding: 16px;
+            color: #7a877c;
+            font-size: 13px;
+        }
+
+        .ticket-number strong {
+            color: #1a2a1f;
+            font-weight: 700;
+        }
+
+        .ticket-footer {
+            background: #fafcfa;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            color: #8a9a8e;
+            font-size: 11px;
+        }
+
+        /* =====================================================
+                   RESPONSIVE
+                ===================================================== */
+        @media (max-width: 1100px) {
+            .consumer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .request-card {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .request-actions {
+                flex-direction: row;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            .main-container {
+                margin-left: 0;
+                padding: 24px 20px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .consumer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .welcome-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .dashboard-date {
+                width: 100%;
+                justify-content: center;
+            }
+            .information-grid {
+                grid-template-columns: 1fr;
+            }
+            .license-details {
+                grid-template-columns: 1fr;
+            }
+            .feedback-grid {
+                grid-template-columns: 1fr;
+            }
+            .request-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .navbar {
+                padding: 0 14px;
+                height: 64px;
+            }
+            .logo span {
+                display: none;
+            }
+            .profile-name {
+                display: none;
+            }
+            .main-container {
+                padding: 16px 12px;
+            }
+            .welcome-section h1 {
+                font-size: 24px;
+            }
+            .dashboard-section {
+                padding: 18px 16px;
+                border-radius: 14px;
+            }
+            .section-heading {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .edit-button,
+            .print-button {
+                width: 100%;
+                justify-content: center;
+            }
+            .consumer-grid {
+                grid-template-columns: 1fr;
+            }
+            .history-item {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .history-info {
+                min-width: calc(100% - 60px);
+            }
+            .status {
+                margin-left: 60px;
+            }
+            .request-actions {
+                flex-direction: column;
+            }
+            .accept-btn,
+            .reject-btn {
+                min-width: unset;
+                width: 100%;
+            }
+            .ticket-body {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 24px 16px;
+            }
+            .ticket-arrow {
+                transform: rotate(90deg);
+            }
+            .ticket-details {
+                grid-template-columns: 1fr 1fr;
+            }
+            .ticket-details div {
+                border-bottom: 1px solid #edf2ee;
+            }
+            .ticket-details div:nth-child(2) {
+                border-right: none;
+            }
+            .ticket-details div:nth-child(3) {
+                border-bottom: none;
+            }
+            .ticket-details div:nth-child(4) {
+                border-right: none;
+                border-bottom: none;
+            }
+            .ticket-footer {
+                flex-direction: column;
+                gap: 6px;
+                text-align: center;
+            }
+            .notification-panel {
+                position: fixed;
+                top: 64px;
+                left: 10px;
+                right: 10px;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .nav-right {
+                gap: 8px;
+            }
+            .navbar {
+                padding: 0 10px;
+            }
+            .welcome-section h1 {
+                font-size: 20px;
+            }
+            .ticket-details {
+                grid-template-columns: 1fr;
+            }
+            .ticket-details div {
+                border-right: none !important;
+                border-bottom: 1px solid #edf2ee !important;
+            }
+            .ticket-details div:last-child {
+                border-bottom: none !important;
+            }
+        }
+
+        /* ---- Scrollbar ---- */
+        .notification-list::-webkit-scrollbar,
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .notification-list::-webkit-scrollbar-track,
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .notification-list::-webkit-scrollbar-thumb,
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #c8d9cd;
+            border-radius: 10px;
+        }
+
+        .notification-list::-webkit-scrollbar-thumb:hover,
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #a8c0af;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle sidebar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="logo">
+                <i class="fa-solid fa-seedling"></i>
+                <span>KisanLink</span>
+            </div>
+        </div>
+
+        <div class="nav-right">
+            <!-- Notification -->
+            <div class="notification-wrapper">
+                <button class="notification-btn" id="notificationBtn" aria-label="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot" id="notificationDot"></span>
+                </button>
+
+                <div class="notification-panel" id="notificationPanel">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <span id="notificationCount">0</span>
+                    </div>
+                    <div class="notification-list" id="notificationList">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Farmer profile -->
+            <button class="top-profile" id="topProfile" aria-label="Profile menu">
+                <div class="profile-image">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="profile-name">
+                    <strong id="navFarmerName">Ramesh Patil</strong>
+                    <small>Farmer</small>
+                </div>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-profile">
+            <div class="big-profile">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <h3 id="sideFarmerName">Ramesh Patil</h3>
+            <span class="role-badge">
+                <i class="fa-solid fa-circle"></i>
+                Farmer
+            </span>
+        </div>
+
+        <div class="side-menu">
+            <button class="side-link active" data-section="profile">
+                <i class="fa-solid fa-house"></i>
+                <span>My Profile</span>
+            </button>
+            <button class="side-link" data-section="license">
+                <i class="fa-solid fa-id-card"></i>
+                <span>License</span>
+            </button>
+            <button class="side-link" data-section="slots">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Consumer Slots</span>
+            </button>
+            <button class="side-link" data-section="history">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>History</span>
+            </button>
+            <button class="side-link" data-section="feedback">
+                <i class="fa-solid fa-star"></i>
+                <span>Feedback</span>
+            </button>
+            <button class="side-link" data-section="notifications">
+                <i class="fa-regular fa-bell"></i>
+                <span>Booking Requests</span>
+            </button>
+            <button class="side-link" data-section="ticketSection">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Booking Ticket</span>
+            </button>
+        </div>
+
+        <div class="sidebar-bottom">
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="main-container">
+
+        <!-- ===== WELCOME ===== -->
+        <section class="welcome-section">
+            <div>
+                <p class="welcome-small">Welcome back,</p>
+                <h1>
+                    <span id="welcomeName">Ramesh Patil</span>
+                    <span class="verified"><i class="fa-solid fa-check"></i></span>
+                </h1>
+                <p class="welcome-text">Manage your farmer profile, products and consumer bookings.</p>
+            </div>
+            <div class="dashboard-date">
+                <i class="fa-regular fa-calendar"></i>
+                <div>
+                    <small>Today</small>
+                    <strong id="todayDate">29 August 2026</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== STATS ===== -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon green"><i class="fa-solid fa-wheat-awn"></i></div>
+                <div class="info">
+                    <span>Available Quantity</span>
+                    <strong id="quantityDisplay">500 KG</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon blue"><i class="fa-solid fa-calendar-check"></i></div>
+                <div class="info">
+                    <span>Consumer Slots</span>
+                    <strong id="slotCount">4 Available</strong>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange"><i class="fa-solid fa-ticket"></i></div>
+                <div class="info">
+                    <span>Confirmed Bookings</span>
+                    <strong id="confirmedCount">2</strong>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+        PROFILE
+        ================================================== -->
+        <section class="dashboard-section active-section" id="profile">
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">FARMER ACCOUNT</span>
+                    <h2>My Profile</h2>
+                    <p>Your registration information.</p>
+                </div>
+                <button class="edit-button" id="editProfileBtn">
+                    <i class="fa-solid fa-pen"></i> Edit Profile
+                </button>
+            </div>
+
+            <div class="information-grid">
+                <div class="information-box"><span>Farmer Name</span><strong>Ramesh Patil</strong></div>
+                <div class="information-box"><span>Email</span><strong>rameshpatil@gmail.com</strong></div>
+                <div class="information-box"><span>Gender</span><strong>Male</strong></div>
+                <div class="information-box"><span>Date of Birth</span><strong>15 March 1985</strong></div>
+                <div class="information-box"><span>Farm Location</span><strong>Pune, Maharashtra</strong></div>
+                <div class="information-box"><span>Village</span><strong>Hinjewadi</strong></div>
+                <div class="information-box"><span>Grain / Product Type</span><strong>Wheat</strong></div>
+                <div class="information-box">
+                    <span>Available Quantity</span>
+                    <div class="quantity-edit">
+                        <input type="number" id="quantityInput" value="500" min="0" />
+                        <span>KG</span>
+                    </div>
+                </div>
+                <div class="information-box"><span>Farmer ID</span><strong>AGR-FR-10245</strong></div>
+                <div class="information-box"><span>Registration Date</span><strong>20 August 2026</strong></div>
+            </div>
+        </section>
+
+        <!-- =================================================
+        LICENSE
+        ================================================== -->
+        <section class="dashboard-section" id="license">
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">VERIFICATION</span>
+                    <h2>Farmer License</h2>
+                    <p>Your agricultural registration and license information.</p>
+                </div>
+            </div>
+            <div class="license-card">
+                <div class="license-top">
+                    <div class="license-symbol"><i class="fa-solid fa-id-card"></i></div>
+                    <div class="info">
+                        <span>License Status</span>
+                        <h3><i class="fa-solid fa-circle-check"></i> Verified</h3>
+                    </div>
+                </div>
+                <div class="license-details">
+                    <div><span>License Number</span><strong>MH-FARM-2026-45821</strong></div>
+                    <div><span>Farmer ID</span><strong>AGR-FR-10245</strong></div>
+                    <div><span>Issued State</span><strong>Maharashtra</strong></div>
+                    <div><span>Valid Until</span><strong>20 August 2031</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+        CONSUMER SLOTS
+        ================================================== -->
+        <section class="dashboard-section" id="slots">
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">CONSUMER BOOKINGS</span>
+                    <h2>Consumer Slots</h2>
+                    <p>View available consumer booking requests.</p>
+                </div>
+            </div>
+
+            <div class="consumer-grid" id="consumerGrid">
+                <!-- Card 1 -->
+                <div class="consumer-card" data-consumer='{"name":"Priya Sharma","product":"Wheat","quantity":"100 KG","date":"30 Aug 2026","time":"10:00 AM - 11:00 AM","location":"Pune","email":"priya@gmail.com","initials":"PS","avatarClass":""}'>
+                    <div class="consumer-header">
+                        <div class="consumer-avatar">PS</div>
+                        <div class="name-wrap"><h3>Priya Sharma</h3><span>Consumer</span></div>
+                        <span class="available-badge">Available</span>
+                    </div>
+                    <div class="consumer-info">
+                        <div class="row"><i class="fa-solid fa-wheat-awn"></i><span class="label">Product</span><span class="value">Wheat</span></div>
+                        <div class="row"><i class="fa-solid fa-weight-hanging"></i><span class="label">Quantity</span><span class="value">100 KG</span></div>
+                        <div class="row"><i class="fa-regular fa-calendar"></i><span class="label">Date</span><span class="value">30 Aug 2026</span></div>
+                        <div class="row"><i class="fa-regular fa-clock"></i><span class="label">Time</span><span class="value">10:00 AM - 11:00 AM</span></div>
+                        <div class="row"><i class="fa-solid fa-location-dot"></i><span class="label">Location</span><span class="value">Pune</span></div>
+                        <div class="row"><i class="fa-regular fa-envelope"></i><span class="label">Email</span><span class="value">priya@gmail.com</span></div>
+                    </div>
+                    <button class="book-button" data-consumer='{"name":"Priya Sharma","product":"Wheat","quantity":"100 KG","date":"30 Aug 2026","time":"10:00 AM - 11:00 AM","location":"Pune","email":"priya@gmail.com"}'>
+                        <i class="fa-solid fa-calendar-plus"></i> Book Consumer Slot
+                    </button>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="consumer-card" data-consumer='{"name":"Neha Joshi","product":"Wheat","quantity":"75 KG","date":"01 Sep 2026","time":"03:00 PM - 04:00 PM","location":"Hinjewadi","email":"neha@gmail.com","initials":"NJ","avatarClass":"purple"}'>
+                    <div class="consumer-header">
+                        <div class="consumer-avatar purple">NJ</div>
+                        <div class="name-wrap"><h3>Neha Joshi</h3><span>Consumer</span></div>
+                        <span class="available-badge">Available</span>
+                    </div>
+                    <div class="consumer-info">
+                        <div class="row"><i class="fa-solid fa-wheat-awn"></i><span class="label">Product</span><span class="value">Wheat</span></div>
+                        <div class="row"><i class="fa-solid fa-weight-hanging"></i><span class="label">Quantity</span><span class="value">75 KG</span></div>
+                        <div class="row"><i class="fa-regular fa-calendar"></i><span class="label">Date</span><span class="value">01 Sep 2026</span></div>
+                        <div class="row"><i class="fa-regular fa-clock"></i><span class="label">Time</span><span class="value">03:00 PM - 04:00 PM</span></div>
+                        <div class="row"><i class="fa-solid fa-location-dot"></i><span class="label">Location</span><span class="value">Hinjewadi</span></div>
+                        <div class="row"><i class="fa-regular fa-envelope"></i><span class="label">Email</span><span class="value">neha@gmail.com</span></div>
+                    </div>
+                    <button class="book-button" data-consumer='{"name":"Neha Joshi","product":"Wheat","quantity":"75 KG","date":"01 Sep 2026","time":"03:00 PM - 04:00 PM","location":"Hinjewadi","email":"neha@gmail.com"}'>
+                        <i class="fa-solid fa-calendar-plus"></i> Book Consumer Slot
+                    </button>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="consumer-card" data-consumer='{"name":"Amit Shah","product":"Rice","quantity":"150 KG","date":"02 Sep 2026","time":"11:00 AM - 12:00 PM","location":"Pimpri","email":"amit@gmail.com","initials":"AS","avatarClass":"blue-avatar"}'>
+                    <div class="consumer-header">
+                        <div class="consumer-avatar blue-avatar">AS</div>
+                        <div class="name-wrap"><h3>Amit Shah</h3><span>Consumer</span></div>
+                        <span class="available-badge">Available</span>
+                    </div>
+                    <div class="consumer-info">
+                        <div class="row"><i class="fa-solid fa-wheat-awn"></i><span class="label">Product</span><span class="value">Rice</span></div>
+                        <div class="row"><i class="fa-solid fa-weight-hanging"></i><span class="label">Quantity</span><span class="value">150 KG</span></div>
+                        <div class="row"><i class="fa-regular fa-calendar"></i><span class="label">Date</span><span class="value">02 Sep 2026</span></div>
+                        <div class="row"><i class="fa-regular fa-clock"></i><span class="label">Time</span><span class="value">11:00 AM - 12:00 PM</span></div>
+                        <div class="row"><i class="fa-solid fa-location-dot"></i><span class="label">Location</span><span class="value">Pimpri</span></div>
+                        <div class="row"><i class="fa-regular fa-envelope"></i><span class="label">Email</span><span class="value">amit@gmail.com</span></div>
+                    </div>
+                    <button class="book-button" data-consumer='{"name":"Amit Shah","product":"Rice","quantity":"150 KG","date":"02 Sep 2026","time":"11:00 AM - 12:00 PM","location":"Pimpri","email":"amit@gmail.com"}'>
+                        <i class="fa-solid fa-calendar-plus"></i> Book Consumer Slot
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+        HISTORY
+        ================================================== -->
+        <section class="dashboard-section" id="history">
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">ACTIVITY</span>
+                    <h2>Booking History</h2>
+                    <p>Your previous consumer bookings.</p>
+                </div>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="history-item">
+                    <div class="history-icon"><i class="fa-solid fa-ticket"></i></div>
+                    <div class="history-info">
+                        <strong>Consumer: Priya Sharma</strong>
+                        <div class="meta"><span>Wheat • 100 KG</span></div>
+                        <small>30 Aug 2026 • 10:00 AM - 11:00 AM</small>
+                    </div>
+                    <span class="status confirmed">Confirmed</span>
+                </div>
+                <div class="history-item">
+                    <div class="history-icon"><i class="fa-solid fa-ticket"></i></div>
+                    <div class="history-info">
+                        <strong>Consumer: Neha Joshi</strong>
+                        <div class="meta"><span>Wheat • 75 KG</span></div>
+                        <small>01 Sep 2026 • 03:00 PM - 04:00 PM</small>
+                    </div>
+                    <span class="status pending">Pending</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+        FEEDBACK
+        ================================================== -->
+        <section class="dashboard-section" id="feedback">
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">CONSUMER FEEDBACK</span>
+                    <h2>Feedback</h2>
+                    <p>Feedback received from consumers.</p>
+                </div>
+            </div>
+            <div class="feedback-grid">
+                <div class="feedback-card">
+                    <div class="feedback-user">
+                        <div class="consumer-avatar">PS</div>
+                        <div class="name-wrap"><strong>Priya Sharma</strong><small>Consumer</small></div>
+                    </div>
+                    <div class="stars">★★★★★</div>
+                    <p>Very smooth booking experience. Product quality was excellent.</p>
+                    <span class="date">28 August 2026</span>
+                </div>
+                <div class="feedback-card">
+                    <div class="feedback-user">
+                        <div class="consumer-avatar purple">NJ</div>
+                        <div class="name-wrap"><strong>Neha Joshi</strong><small>Consumer</small></div>
+                    </div>
+                    <div class="stars">★★★★☆</div>
+                    <p>Good communication and easy slot booking process.</p>
+                    <span class="date">27 August 2026</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+        BOOKING REQUESTS
+        ================================================== -->
+        <section class="dashboard-section" id="notifications">
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">ALERTS</span>
+                    <h2>Booking Requests</h2>
+                    <p>Accept or reject consumer booking requests.</p>
+                </div>
+            </div>
+            <div id="requestList">
+                <!-- Rendered by JS -->
+                <div class="request-empty" id="requestEmpty">
+                    <i class="fa-regular fa-inbox"></i>
+                    <p>No pending booking requests.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================
+        TICKET
+        ================================================== -->
+        <section class="dashboard-section" id="ticketSection">
+            <div class="section-heading">
+                <div>
+                    <span class="section-tag">BOOKING CONFIRMED</span>
+                    <h2>Booking Ticket</h2>
+                    <p>Generated after the farmer accepts a consumer request.</p>
+                </div>
+                <button class="print-button" id="printTicketBtn">
+                    <i class="fa-solid fa-print"></i> Print Ticket
+                </button>
+            </div>
+
+            <div class="ticket" id="ticket">
+                <div class="ticket-header">
+                    <div class="brand"><i class="fa-solid fa-seedling"></i> KisanLink</div>
+                    <span class="badge">Verified Booking</span>
+                </div>
+
+                <div class="ticket-body">
+                    <div class="ticket-person">
+                        <span>Farmer</span>
+                        <h3 id="ticketFarmer">Ramesh Patil</h3>
+                        <p>Farmer ID: AGR-FR-10245</p>
+                        <p>Pune, Maharashtra</p>
+                    </div>
+                    <div class="ticket-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="ticket-person">
+                        <span>Consumer</span>
+                        <h3 id="ticketConsumer">Priya Sharma</h3>
+                        <p>Consumer</p>
+                        <p id="ticketLocation">Pune</p>
+                    </div>
+                </div>
+
+                <div class="ticket-details">
+                    <div><span>Product</span><strong id="ticketProduct">Wheat</strong></div>
+                    <div><span>Quantity</span><strong id="ticketQuantity">100 KG</strong></div>
+                    <div><span>Date</span><strong id="ticketDate">30 Aug 2026</strong></div>
+                    <div><span>Time Slot</span><strong id="ticketTime">10:00 AM - 11:00 AM</strong></div>
+                </div>
+
+                <div class="ticket-number">
+                    Ticket ID: <strong id="ticketId">AGR-2026-785421</strong>
+                </div>
+
+                <div class="ticket-footer">
+                    <span><i class="fa-solid fa-shield-halved"></i> Verified booking</span>
+                    <span>KisanLink</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ---------- DOM refs ----------
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const topProfile = document.getElementById('topProfile');
+            const notificationBtn = document.getElementById('notificationBtn');
+            const notificationPanel = document.getElementById('notificationPanel');
+            const notificationDot = document.getElementById('notificationDot');
+            const notificationCount = document.getElementById('notificationCount');
+            const notificationList = document.getElementById('notificationList');
+            const requestList = document.getElementById('requestList');
+            const requestEmpty = document.getElementById('requestEmpty');
+            const quantityInput = document.getElementById('quantityInput');
+            const quantityDisplay = document.getElementById('quantityDisplay');
+            const confirmedCount = document.getElementById('confirmedCount');
+            const slotCount = document.getElementById('slotCount');
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const printTicketBtn = document.getElementById('printTicketBtn');
+
+            // ---------- State ----------
+            let pendingRequests = []; // Array of request objects
+            let confirmedBookings = 2; // Starting count
+
+            // ---------- Helpers ----------
+            function getInitials(name) {
+                if (!name) return '??';
+                const parts = name.trim().split(/\s+/);
+                if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+                return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+            }
+
+            function generateTicketId() {
+                return 'AGR-' + String(Math.floor(100000 + Math.random() * 900000));
+            }
+
+            function formatDate() {
+                const d = new Date();
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+            }
+
+            // ---------- Update notification badge ----------
+            function updateNotificationBadge() {
+                const count = pendingRequests.length;
+                notificationCount.textContent = count;
+                if (count > 0) {
+                    notificationDot.classList.add('visible');
+                } else {
+                    notificationDot.classList.remove('visible');
+                }
+                // Update slot count display
+                const availableSlots = 4 - confirmedBookings;
+                slotCount.textContent = Math.max(0, availableSlots) + ' Available';
+            }
+
+            // ---------- Render notification panel ----------
+            function renderNotifications() {
+                if (pendingRequests.length === 0) {
+                    notificationList.innerHTML =
+                        '<div class="notification-empty"><i class="fa-regular fa-bell" style="font-size:28px;display:block;margin-bottom:10px;color:#d6ddd7;"></i>No new notifications</div>';
+                    return;
+                }
+                let html = '';
+                pendingRequests.forEach((req, index) => {
+                    html += `
+                                <div class="notification-item" data-index="${index}">
+                                    <div class="notification-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                                    <div class="content">
+                                        <strong>New Booking Request</strong>
+                                        <p>${req.name} requested a slot for ${req.product} (${req.quantity})</p>
+                                        <small>${req.date} • ${req.time}</small>
+                                    </div>
+                                </div>
+                            `;
+                });
+                notificationList.innerHTML = html;
+            }
+
+            // ---------- Render pending requests in the requests section ----------
+            function renderRequests() {
+                if (pendingRequests.length === 0) {
+                    requestList.innerHTML = `
+                                <div class="request-empty">
+                                    <i class="fa-regular fa-inbox"></i>
+                                    <p>No pending booking requests.</p>
+                                </div>
+                            `;
+                    return;
+                }
+
+                let html = '';
+                pendingRequests.forEach((req, index) => {
+                    const initials = getInitials(req.name);
+                    html += `
+                                <div class="request-card" data-index="${index}">
+                                    <div class="request-user">
+                                        <div class="consumer-avatar">${initials}</div>
+                                        <div class="name-wrap">
+                                            <h3>${req.name}</h3>
+                                            <span>Consumer</span>
+                                        </div>
+                                    </div>
+                                    <div class="request-details">
+                                        <span><b>Product:</b> ${req.product}</span>
+                                        <span><b>Quantity:</b> ${req.quantity}</span>
+                                        <span><b>Date:</b> ${req.date}</span>
+                                        <span><b>Time:</b> ${req.time}</span>
+                                        <span><b>Location:</b> ${req.location}</span>
+                                        <span><b>Email:</b> ${req.email}</span>
+                                    </div>
+                                    <div class="request-actions">
+                                        <button class="accept-btn" data-index="${index}">
+                                            <i class="fa-solid fa-check"></i> Accept
+                                        </button>
+                                        <button class="reject-btn" data-index="${index}">
+                                            <i class="fa-solid fa-xmark"></i> Reject
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                });
+                requestList.innerHTML = html;
+
+                // Attach event listeners to accept/reject buttons
+                document.querySelectorAll('.accept-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = parseInt(this.getAttribute('data-index'), 10);
+                        acceptRequest(idx);
+                    });
+                });
+
+                document.querySelectorAll('.reject-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const idx = parseInt(this.getAttribute('data-index'), 10);
+                        rejectRequest(idx);
+                    });
+                });
+            }
+
+            // ---------- Accept request ----------
+            function acceptRequest(index) {
+                if (index < 0 || index >= pendingRequests.length) return;
+                const req = pendingRequests[index];
+
+                // Update ticket
+                document.getElementById('ticketConsumer').textContent = req.name;
+                document.getElementById('ticketProduct').textContent = req.product;
+                document.getElementById('ticketQuantity').textContent = req.quantity;
+                document.getElementById('ticketDate').textContent = req.date;
+                document.getElementById('ticketTime').textContent = req.time;
+                document.getElementById('ticketLocation').textContent = req.location;
+                document.getElementById('ticketId').textContent = generateTicketId();
+
+                // Increment confirmed bookings
+                confirmedBookings += 1;
+                confirmedCount.textContent = confirmedBookings;
+
+                // Add to history
+                addHistoryEntry(req, 'confirmed');
+
+                // Remove from pending
+                pendingRequests.splice(index, 1);
+                updateNotificationBadge();
+                renderNotifications();
+                renderRequests();
+
+                // Navigate to ticket
+                document.querySelector('[data-section="ticketSection"]').click();
+
+                // Show success
+                showToast('Booking accepted. Ticket generated.', 'success');
+            }
+
+            // ---------- Reject request ----------
+            function rejectRequest(index) {
+                if (index < 0 || index >= pendingRequests.length) return;
+                const req = pendingRequests[index];
+
+                // Add to history as rejected (optional)
+                addHistoryEntry(req, 'rejected');
+
+                pendingRequests.splice(index, 1);
+                updateNotificationBadge();
+                renderNotifications();
+                renderRequests();
+
+                showToast('Booking request rejected.', 'info');
+            }
+
+            // ---------- Add history entry ----------
+            function addHistoryEntry(req, status) {
+                const historyList = document.getElementById('historyList');
+                const statusClass = status === 'confirmed' ? 'confirmed' : 'pending';
+                const statusLabel = status === 'confirmed' ? 'Confirmed' : 'Rejected';
+
+                const entry = document.createElement('div');
+                entry.className = 'history-item';
+                entry.innerHTML = `
+                            <div class="history-icon"><i class="fa-solid fa-ticket"></i></div>
+                            <div class="history-info">
+                                <strong>Consumer: ${req.name}</strong>
+                                <div class="meta"><span>${req.product} • ${req.quantity}</span></div>
+                                <small>${req.date} • ${req.time}</small>
+                            </div>
+                            <span class="status ${statusClass}">${statusLabel}</span>
+                        `;
+                historyList.prepend(entry);
+            }
+
+            // ---------- Book a consumer slot ----------
+            function bookConsumer(data) {
+                // Check if consumer already has a pending request
+                const exists = pendingRequests.some(r =>
+                    r.name === data.name &&
+                    r.date === data.date &&
+                    r.time === data.time
+                );
+                if (exists) {
+                    showToast('This consumer already has a pending request.', 'warning');
+                    return;
+                }
+
+                // Add to pending requests
+                pendingRequests.push({
+                    name: data.name,
+                    product: data.product,
+                    quantity: data.quantity,
+                    date: data.date,
+                    time: data.time,
+                    location: data.location,
+                    email: data.email
+                });
+
+                updateNotificationBadge();
+                renderNotifications();
+                renderRequests();
+
+                // Navigate to booking requests
+                document.querySelector('[data-section="notifications"]').click();
+
+                showToast(`Booking request sent to ${data.name}.`, 'success');
+            }
+
+            // ---------- Toast ----------
+            function showToast(message, type) {
+                const existing = document.querySelector('.toast-message');
+                if (existing) existing.remove();
+
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                const bg = type === 'success' ? '#1a7a3e' : type === 'warning' ? '#b46d11' : '#2c70b3';
+                toast.style.cssText = `
+                            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+                            background: ${bg}; color: #fff; padding: 14px 28px;
+                            border-radius: 12px; font-weight: 600; font-size: 14px;
+                            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+                            z-index: 9999; max-width: 90%;
+                            animation: fadeSlide 0.3s ease;
+                            text-align: center;
+                        `;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transition = 'opacity 0.3s';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+
+            // ---------- Sidebar / Navigation ----------
+            const sideLinks = document.querySelectorAll('.side-link');
+            const sections = document.querySelectorAll('.dashboard-section');
+
+            sideLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const sectionId = this.getAttribute('data-section');
+                    sideLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    sections.forEach(s => s.classList.remove('active-section'));
+                    const target = document.getElementById(sectionId);
+                    if (target) target.classList.add('active-section');
+
+                    // Close sidebar on mobile
+                    if (window.innerWidth <= 900) {
+                        sidebar.classList.remove('show');
+                        overlay.classList.remove('show');
+                    }
+                });
+            });
+
+            // ---------- Hamburger ----------
+            hamburgerBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+            });
+
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('show');
+                overlay.classList.remove('show');
+            });
+
+            // ---------- Top profile toggle ----------
+            topProfile.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+                overlay.classList.toggle('show');
+            });
+
+            // ---------- Notification panel ----------
+            notificationBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationPanel.classList.toggle('show');
+                // Mark as viewed - hide dot
+                if (pendingRequests.length === 0) {
+                    notificationDot.classList.remove('visible');
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!notificationPanel.contains(e.target) && !notificationBtn.contains(e.target)) {
+                    notificationPanel.classList.remove('show');
+                }
+            });
+
+            // ---------- Quantity input ----------
+            quantityInput.addEventListener('input', function() {
+                const val = parseInt(this.value, 10) || 0;
+                quantityDisplay.textContent = val + ' KG';
+            });
+
+            // ---------- Edit profile ----------
+            editProfileBtn.addEventListener('click', function() {
+                showToast('Profile editing can be connected to your registration form / backend.', 'info');
+            });
+
+            // ---------- Logout ----------
+            logoutBtn.addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    showToast('Logging out...', 'info');
+                    setTimeout(() => {
+                        window.location.href = '#';
+                        showToast('Logged out successfully.', 'success');
+                    }, 600);
+                }
+            });
+
+            // ---------- Print ticket ----------
+            printTicketBtn.addEventListener('click', function() {
+                const ticket = document.getElementById('ticket');
+                const win = window.open('', '_blank');
+                if (!win) {
+                    showToast('Please allow popups to print.', 'warning');
+                    return;
+                }
+                const styles = document.querySelector('style').innerHTML;
+                win.document.write(`
+                            <html>
+                                <head><title>Booking Ticket</title>
+                                <style>${styles}</style>
+                                <style>body { padding: 40px; background: #fff; } .ticket { max-width: 700px; margin: auto; } .ticket-arrow { background: #e9f6eb; } .print-button, .navbar, .sidebar, .overlay, .stats-grid, .welcome-section, .dashboard-section { display: none; } .dashboard-section#ticketSection { display: block !important; border: none; padding: 0; } .main-container { margin: 0; padding: 0; }</style>
+                                </head>
+                                <body>${ticket.outerHTML}</body>
+                            </html>
+                        `);
+                win.document.close();
+                setTimeout(() => { win.print(); }, 400);
+            });
+
+            // ---------- Book button event delegation ----------
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.book-button');
+                if (btn) {
+                    try {
+                        const data = JSON.parse(btn.getAttribute('data-consumer'));
+                        bookConsumer(data);
+                    } catch (err) {
+                        showToast('Error processing booking.', 'warning');
+                    }
+                }
+            });
+
+            // ---------- Set today's date ----------
+            document.getElementById('todayDate').textContent = formatDate();
+
+            // ---------- Init ----------
+            updateNotificationBadge();
+            renderNotifications();
+            renderRequests();
+
+            // Ensure the ticket section has a default ticket
+            // (already populated in HTML)
+
+            console.log('✅ KisanLink Dashboard ready.');
+
+        })();
+    </script>
+
+</body>
+</html>
